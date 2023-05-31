@@ -215,15 +215,15 @@ for (var i = 0; i < count; i++) {
 }
 
 // Create a Web Audio API context and an analyser node:
-var audioCtx = new AudioContext();
-var analyser = audioCtx.createAnalyser();
-analyser.fftSize = 256;
-var bufferLength = analyser.frequencyBinCount;
-var dataArray = new Uint8Array(bufferLength);
+var audioCtx; //= new AudioContext();
+var analyser; //= audioCtx.createAnalyser();
+// analyser.fftSize;// = 256;
+var bufferLength; //= analyser.frequencyBinCount;
+var dataArray; // = new Uint8Array(bufferLength);
 
 // Create an Audio element and load the audio file:
-var audio = new Audio('./house.mp3');
-audio.crossOrigin = 'anonymous';
+var audio;// = new Audio('./house.mp3');
+// audio.crossOrigin = 'anonymous';
 
 // Variable to track if the music is currently playing
 var isPlaying = false;
@@ -240,6 +240,14 @@ function toggleMusic() {
     paper.view.onFrame = null;
   } else {
     // Start the music and animation
+    audioCtx = new AudioContext();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+    audio = new Audio('./house.mp3');
+    audio.crossOrigin = 'anonymous';
+
     audio.play();
     isPlaying = true;
     startButton.innerHTML = 'Stop ◼️';
