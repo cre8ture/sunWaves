@@ -9,23 +9,36 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.17/paper-full.min.js"
     integrity="sha512-NApOOz1j2Dz1PKsIvg1hrXLzDFd62+J0qOPIhm8wueAnk4fQdSclq6XvfzvejDs6zibSoDC+ipl1dC66m+EoSQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- defer waits for dom to load before excecuting script -->
-  <!-- <script src="script.js" async defer></script> -->
   <script src="audioWaves.js" async defer></script>
 
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #startButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      background: #ffffff;
+      padding: 10px 15px;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
-<!--   <div id="drop-zone">Drop audio file here</div> -->
+  <button id="startButton">Start &#9658;</button>
 
   <canvas id="canvas"></canvas>
 
- -->
-  <!--
-  This script places a badge on your repl's full-browser view back to your repl's cover
-  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
-  teal, blue, blurple, magenta, pink!
-  -->
 </body>
 
 </html>
