@@ -1,29 +1,3 @@
-
-const dropZone = document.getElementById("drop-zone");
-
-dropZone.addEventListener("drop", (event) => {
-  event.preventDefault();
-  const file = event.dataTransfer.files[0];
-  const url = URL.createObjectURL(file);
-  playAudio(url);
-});
-
-document.addEventListener("dragover", (event) => {
-  event.preventDefault();
-});
-
-document.addEventListener("drop", (event) => {
-  event.preventDefault();
-});
-
-var audio; //  = new Audio('./house.mp3');
-
-function playAudio(url, audio) {
-  audio = new Audio(url);
-  audio.play();
-}
-
-
 // Setup Paper.js
 var canvas = document.getElementById('canvas');
 canvas.width = window.innerWidth;
@@ -50,7 +24,6 @@ var circle = new paper.Path.Circle({
   fillColor: { hue: 60, saturation: 1, brightness: 0.7 }
 });
 
-
 // Calculate the dimensions of the rectangle
 var rectangleWidth = rad * 3;
 var rectangleHeight = rad;
@@ -63,16 +36,12 @@ var rectangleY = paper.view.center.y + rad / 7;
 paper.view.draw();
 // Create a rectangle
 var rectangle = new paper.Path.Rectangle({
-  // point: [rectangleX, rectangleY],
-  // size: [rectangleWidth, rectangleHeight],
-  from: [0, paper.view.center.y+2],
+  from: [0, paper.view.center.y + 2],
   to: [paper.view.size.width, paper.view.size.height],
-  fillColor: 'rgba(0, 0, 0, 0.9)',
   fillColor: 'rgba(0, 0, 0, 0.9)',
   strokeColor: null,
   strokeWidth: 0
 });
-
 
 // Loop through the paths and create a new path for each one
 for (var i = 0; i < count; i++) {
@@ -84,7 +53,7 @@ for (var i = 0; i < count; i++) {
 
   // Create a new path and style it with the gray shade
   var path = new paper.Path({
-    strokeColor: { hue: 0, saturation: 0, brightness: grayShade / 255 }, // Set the stroke color with the calculated gray shade
+    strokeColor: { hue: 0, saturation: 0, brightness: grayShade / 255 },
     strokeWidth: 2,
     strokeCap: 'round'
   });
@@ -95,15 +64,10 @@ for (var i = 0; i < count; i++) {
   // Add segment points to the path spread out over the width of the view:
   for (var j = 0; j <= amount; j++) {
     var currSizeX = j / amount * paper.view.size.width;
-    var currSizeY = paper.view.size.height; // Set the Y coordinate to the height of the canvas
+    var currSizeY = paper.view.size.height;
     path.add(new paper.Point(currSizeX, currSizeY));
   }
 }
-
-
-
-// Select the path, so we can see how it is constructed:
-// path.selected = true;
 
 // Create a Web Audio API context and an analyser node:
 var audioCtx = new AudioContext();
@@ -117,7 +81,7 @@ var audio = new Audio('./house.mp3');
 audio.crossOrigin = 'anonymous';
 audio.addEventListener('canplaythrough', function() {
   audio.play();
-})
+});
 
 // Connect the audio element to the analyser node:
 var source = audioCtx.createMediaElementSource(audio);
@@ -145,10 +109,9 @@ paper.view.onFrame = function onFrame(event) {
       var height = maxHeight * amplitude;
       var sinus = Math.sin(event.time * 3 + i * 10 + j);
       segment.point.y = sinus * height + i * maxHeight / 2 + paper.view.size.height / 2;
-      // console.log(segment.point.y)
     }
 
     // Smooth the path to make it look nicer:
     path.smooth();
   }
-}
+};
